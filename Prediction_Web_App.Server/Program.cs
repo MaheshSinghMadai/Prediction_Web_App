@@ -1,5 +1,10 @@
+using FinancePersonal.Infrastructure.Data.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Prediction_Web_App.Core.Entities.Identity;
+using Prediction_Web_App.Core.Interface;
 using Prediction_Web_App.Infrastructure.Data;
+using Prediction_Web_App.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +18,22 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+builder.Services.AddDbContext<AppIdentityDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+builder.Services.AddControllers();
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    // Identity options here
+})
+    .AddEntityFrameworkStores<AppIdentityDbContext>()
+    .AddDefaultTokenProviders();
+
+
 
 var app = builder.Build();
 
