@@ -1,19 +1,24 @@
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of fixturesList">
-        <th scope="row">1</th>
-        <td>item.id</td>
-        <td>Otto</td>
-        <td></td>
-      </tr>
-      
-    </tbody>
-  </table>
+
+<h1 class="header text-center">
+  <img src="../../../../assets/euro.jpg" style="height:30px; width:30px"> Euro 2024 Fixtures</h1>
+<div class="container">
+  <div class="row fixtures-row" *ngFor="let item of fixturesList; let i = index">
+    <div class="col-md-12 d-flex flex-direction-row">
+      <div class="col-2">
+        <img src="../../../../assets/euro.jpg" style="height:30px; width:30px">
+      </div>
+      <div class="col-3">
+        {{item.country1}}
+      </div>
+      <div class="col-1">
+        vs
+      </div>
+      <div class="col-3">
+        {{item.country2}}
+      </div>
+      <div class="col-2">
+        <img src="../../../../assets/euro.jpg" style="height:40px; width:40px">
+      </div>
+    </div>
+  </div>
+</div>
