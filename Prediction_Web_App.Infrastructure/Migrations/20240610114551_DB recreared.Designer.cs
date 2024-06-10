@@ -11,8 +11,8 @@ using Prediction_Web_App.Infrastructure.Data;
 namespace Prediction_Web_App.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240606163012_Tables update")]
-    partial class Tablesupdate
+    [Migration("20240610114551_DB recreared")]
+    partial class DBrecreared
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,9 @@ namespace Prediction_Web_App.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Country_ID"), 1L, 1);
 
                     b.Property<string>("Country_Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FlagWebUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Group")
@@ -62,9 +65,6 @@ namespace Prediction_Web_App.Infrastructure.Migrations
                     b.Property<int>("Country2_Score")
                         .HasColumnType("int");
 
-                    b.Property<int>("Goal_Scorer_Tbl_Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Result")
                         .HasColumnType("nvarchar(max)");
 
@@ -89,6 +89,10 @@ namespace Prediction_Web_App.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Fixture_Id");
+
+                    b.HasIndex("Player_Id");
+
                     b.ToTable("Goal_Scorers");
                 });
 
@@ -100,13 +104,15 @@ namespace Prediction_Web_App.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Player_ID"), 1L, 1);
 
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Country_Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Player_Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Player_ID");
+
+                    b.HasIndex("Country_Id");
 
                     b.ToTable("Player_Infos");
                 });
@@ -136,7 +142,90 @@ namespace Prediction_Web_App.Infrastructure.Migrations
 
                     b.HasKey("Prediction_ID");
 
+                    b.HasIndex("Fixture_ID");
+
                     b.ToTable("Predictions");
+                });
+
+            modelBuilder.Entity("Prediction_Web_App.Core.Entities.Scorecard", b =>
+                {
+                    b.Property<int>("Final_Score_Points")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Fixture_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Goal_Scorer_Points")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Result_Points")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total_Points")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User_ID")
+                        .HasColumnType("int");
+
+                    b.ToTable("Scorecards");
+                });
+
+            modelBuilder.Entity("Prediction_Web_App.Core.Entities.Goal_Scorer", b =>
+                {
+                    b.HasOne("Prediction_Web_App.Core.Entities.Fixture", "Fixture")
+                        .WithMany("Goal_Scorers")
+                        .HasForeignKey("Fixture_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Prediction_Web_App.Core.Entities.Player_Info", "Player")
+                        .WithMany("GoalScorers")
+                        .HasForeignKey("Player_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Fixture");
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("Prediction_Web_App.Core.Entities.Player_Info", b =>
+                {
+                    b.HasOne("Prediction_Web_App.Core.Entities.Country", "Country")
+                        .WithMany("Players")
+                        .HasForeignKey("Country_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("Prediction_Web_App.Core.Entities.Prediction", b =>
+                {
+                    b.HasOne("Prediction_Web_App.Core.Entities.Fixture", "Fixture")
+                        .WithMany("Predictions")
+                        .HasForeignKey("Fixture_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Fixture");
+                });
+
+            modelBuilder.Entity("Prediction_Web_App.Core.Entities.Country", b =>
+                {
+                    b.Navigation("Players");
+                });
+
+            modelBuilder.Entity("Prediction_Web_App.Core.Entities.Fixture", b =>
+                {
+                    b.Navigation("Goal_Scorers");
+
+                    b.Navigation("Predictions");
+                });
+
+            modelBuilder.Entity("Prediction_Web_App.Core.Entities.Player_Info", b =>
+                {
+                    b.Navigation("GoalScorers");
                 });
 #pragma warning restore 612, 618
         }

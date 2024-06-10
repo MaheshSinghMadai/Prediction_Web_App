@@ -44,7 +44,6 @@ namespace Prediction_Web_App.Infrastructure.Data
                 .HasMany(p => p.GoalScorers)
                 .WithOne(gs => gs.Player)
                 .HasForeignKey(gs => gs.Player_Id);
-
         }
     }
 

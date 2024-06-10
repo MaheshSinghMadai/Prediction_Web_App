@@ -32,6 +32,9 @@ namespace Prediction_Web_App.Infrastructure.Migrations
                     b.Property<string>("Country_Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("FlagWebUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Group")
                         .HasColumnType("nvarchar(max)");
 

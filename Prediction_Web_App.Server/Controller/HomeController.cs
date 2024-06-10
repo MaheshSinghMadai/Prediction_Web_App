@@ -27,5 +27,19 @@ namespace Prediction_Web_App.Server.Controller
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> GetCountriesList()
+        {
+            try
+            {
+                return Ok(await _db.Countries.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
     }
 }

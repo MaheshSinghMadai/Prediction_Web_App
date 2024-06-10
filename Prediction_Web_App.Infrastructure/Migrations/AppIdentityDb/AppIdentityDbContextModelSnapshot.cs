@@ -168,7 +168,6 @@ namespace Prediction_Web_App.Infrastructure.Migrations.AppIdentityDb
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DisplayName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -179,11 +178,9 @@ namespace Prediction_Web_App.Infrastructure.Migrations.AppIdentityDb
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -213,7 +210,6 @@ namespace Prediction_Web_App.Infrastructure.Migrations.AppIdentityDb
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Token")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
