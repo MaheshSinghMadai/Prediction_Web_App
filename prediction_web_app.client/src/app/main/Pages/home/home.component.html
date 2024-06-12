@@ -19,6 +19,11 @@
       <div class="col-2">
         <img [src]="item.country2_Flag" style="height:40px; width:40px">
       </div>
+      <div class="col-1"  [routerLink]="['/main/prediction',item.fixture_ID]">
+        <span>
+          <i class="fa-brands fa-opencart"></i>
+        </span>
+      </div>
     </div>
   </div>
 </div>

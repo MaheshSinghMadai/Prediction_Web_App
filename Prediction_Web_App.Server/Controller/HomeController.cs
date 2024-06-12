@@ -30,6 +30,24 @@ namespace Prediction_Web_App.Server.Controller
 
         [HttpGet]
         [Route("[action]")]
+        public async Task<IActionResult> GetFixtureById([FromQuery] int fixture_ID)
+        {
+            try
+            {
+                var query = (from f in _db.Fixtures
+                             where f.Fixture_ID == fixture_ID
+                             select f).ToList();
+
+                return Ok(query);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]")]
         public async Task<IActionResult> GetCountriesList()
         {
             try

@@ -11,4 +11,8 @@ export class HomeService {
   getFixturesList(){
     return this.http.get(`${this.baseUrl}/Home/GetFixturesList`);
   }
+
+  getFixtureById(fixture_ID: number){
+    return this.http.get(`${this.baseUrl}/Home/GetFixtureById?fixture_ID=${fixture_ID}`);
+  }
 }
