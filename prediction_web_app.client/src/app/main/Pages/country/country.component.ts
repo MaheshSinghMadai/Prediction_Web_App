@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { CountryService } from '../../Services/country.service';
+import { PredictionService } from '../../Services/prediction.service';
 
 @Component({
   selector: 'app-country',
@@ -11,7 +11,7 @@ export class CountryComponent  implements OnInit{
 
   countriesList : any = [];
   constructor(
-    private countryService: CountryService,
+    private predictionService: PredictionService,
     private http: HttpClient) {
     
   }
@@ -20,7 +20,7 @@ export class CountryComponent  implements OnInit{
   }
 
   getCountries() {
-    this.countryService.getCountriesList().subscribe(
+    this.predictionService.getCountriesList().subscribe(
       (response) => {
         this.countriesList = response;
         console.log(response);

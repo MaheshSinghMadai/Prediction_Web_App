@@ -8,14 +8,18 @@ import { AuthComponent } from './auth/auth.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
+import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    NavBarComponent
   ],
   imports: [
     AppRoutingModule,
+    SharedModule,
     BrowserModule,
     HttpClientModule, 
     BrowserModule, 

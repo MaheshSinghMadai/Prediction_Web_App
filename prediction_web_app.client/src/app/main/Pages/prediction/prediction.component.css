@@ -1,10 +1,10 @@
 .card{
-    margin:20px;
+    margin:90px 20px 20px 20px;
     padding:20px;
 }
 .a{
     margin-top:30px;
-    font-size:25px;
+    font-size:20px;
 }
 
 .flag-img{
@@ -19,3 +19,12 @@
 .select-players{
     margin-left:50px;
 }
+
+.save-btn {
+    margin: 10px 20px 20px 5px;
+    border: none;
+    background-color: #594aa8;
+    color: white;
+    border-radius: 5px !important;
+    padding: 10px;
+ }

@@ -1,0 +1,32 @@
+
+.navbar {
+  font-family: "Poppins";
+  font-weight: 700;
+  background: #108299;
+  height:80px;
+  /* background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(0, 107, 161, 1) 0%, rgba(56, 206, 237, 1) 100%); */
+}
+
+.brand-left{
+  color:white
+}
+
+.dropdown-btn{
+  color:white;
+}
+
+.dropdown-item{
+  margin:10px 0 10px 0;
+  cursor: pointer;
+}
+
+.dropdown-item::after{
+  border: none !important;
+  outline: none !important;
+  cursor: pointer;
+}
+
+.logo{
+  height:40px;
+  width:70px;
+}

@@ -29,19 +29,8 @@ namespace Prediction_Web_App.Infrastructure.Data.Identity
                         DisplayName = "krishna",
                         Email = "krishna@test.com",
                         UserName = "krishna",
-                    },
-                     new AppUser
-                    {
-                        DisplayName = "rakshak",
-                        Email = "rakshak@test.com",
-                        UserName = "rakshak",
-                    },
-                      new AppUser
-                    {
-                        DisplayName = "santosh",
-                        Email = "santosh@test.com",
-                        UserName = "santosh",
                     }
+                   
                 };
 
                 var passwords = new List<string>
@@ -49,8 +38,6 @@ namespace Prediction_Web_App.Infrastructure.Data.Identity
                     "P@$$w0rd",
                     "kasam@123",
                     "krishna@123",
-                    "rakshak@123",
-                    "santosh@123",
                 // Add corresponding passwords for each user
                 };
 

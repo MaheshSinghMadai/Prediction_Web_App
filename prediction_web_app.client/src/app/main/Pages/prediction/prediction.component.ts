@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HomeService } from '../../Services/home.service';
 import { AuthService } from '../../../auth/auth.service';
+import { PredictionService } from '../../Services/prediction.service';
 
 @Component({
   selector: 'app-prediction',
@@ -15,7 +16,9 @@ export class PredictionComponent implements OnInit{
   fixture_id: any;
   fixture: any = [];
   playersList : any = [];
-  predictionForm: any = [];
+  fixturePrediction : any = [];
+  allFixturePrediction : any = [];
+  predictionForm: FormGroup;
 
   userId: any = this.authService.currentUserSource.value?.userId;
 
@@ -24,15 +27,14 @@ export class PredictionComponent implements OnInit{
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private homeService: HomeService,
+    private predictionService: PredictionService,
     private authService: AuthService
   ) {
     this.predictionForm = this.formBuilder.group({
-      fixture_id: this.fixture_id,
       country1_score: ['', Validators.required],
       country2_score: ['', Validators.required],
-      result: 'Draw',
-      goal_scorer:['', Validators.required],
-      user_id : this.userId
+      result: ['', Validators.required],
+      goal_scorer: ['', Validators.required],
     })
   }
   
@@ -44,6 +46,7 @@ export class PredictionComponent implements OnInit{
     )
     
     this.getFixtureById();
+    this.getPredictionOfUserByFixure();
   }
 
   getFixtureById() {
@@ -60,12 +63,10 @@ export class PredictionComponent implements OnInit{
   }
 
   getPlayesrByFixture(country1: string, country2:string) {
-    console.log(this.fixture);
-    
     this.homeService.getPlayersByFixture(country1,country2).subscribe(
       (response) => {
         this.playersList = response;
-        console.log(this.playersList);
+        // console.log(this.playersList);
       },
       error => {
         console.log(error);
@@ -73,4 +74,50 @@ export class PredictionComponent implements OnInit{
     )
   }
 
+  getAllPredictionByUser(){
+    this.predictionService.getAllPredictionsByUser(this.userId).subscribe(
+      (response) => {
+        this.allFixturePrediction = response;
+        console.log(this.allFixturePrediction);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  getPredictionOfUserByFixure(){
+    this.predictionService.getPredictionOfUserByFixure(this.userId,this.fixture_id).subscribe(
+      (response) => {
+        this.fixturePrediction = response;
+        console.log(this.fixturePrediction);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  submit(){
+    const body = {
+      fixture_id: this.fixture_id as number,
+      country1_score: this.predictionForm.value['country1_score'],
+      country2_score: this.predictionForm.value['country2_score'],
+      goal_scorer: this.predictionForm.value['goal_scorer'] as number,
+      user_id : this.userId
+    }
+    
+    this.predictionService.addNewPrediction(body).subscribe(
+      (response) => {
+        console.log(response);
+        this.toastr.success('Prediction submitted');
+        this.predictionForm.reset();
+        this.getFixtureById();
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error(error.error)
+      }
+    )
+  }
 }
