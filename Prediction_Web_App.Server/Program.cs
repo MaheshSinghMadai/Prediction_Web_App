@@ -4,12 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Prediction_Web_App.Core.Entities.Identity;
 using Prediction_Web_App.Core.Interface;
 using Prediction_Web_App.Infrastructure.Data;
+using Prediction_Web_App.Infrastructure.Data.Identity;
 using Prediction_Web_App.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddControllers();
@@ -36,7 +38,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(); ;
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
     // Identity options here
@@ -44,7 +46,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     .AddEntityFrameworkStores<AppIdentityDbContext>()
     .AddDefaultTokenProviders();
 
-
+builder.Services.AppIdentityServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -62,10 +64,26 @@ app.UseHttpsRedirection();
 
 app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
-app.UseAuthentication();
 
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+try
+{
+    // Seeding identity data to identity database
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    var identityContext = services.GetRequiredService<AppIdentityDbContext>();
+    await identityContext.Database.MigrateAsync();
+    await AppIdentityDbContextSeed.SeedUserAsync(userManager);
+}
+catch (Exception ex)
+{
+    var logger = loggerFactory.CreateLogger<Program>();
+    logger.LogError(ex, "An error occurred seeding the DB.");
+}
 
 app.Run();

@@ -6,16 +6,23 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { AuthComponent } from './auth/auth.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ToastrModule } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
-    AuthComponent
+    MainComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserModule,
+    HttpClientModule, 
+    BrowserModule, 
+    HttpClientModule,
+    AppRoutingModule,
+    ToastrModule.forRoot(),
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync()

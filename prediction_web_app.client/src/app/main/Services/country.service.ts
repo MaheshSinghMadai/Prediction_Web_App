@@ -9,6 +9,6 @@ export class CountryService {
   constructor(private http: HttpClient) { }
 
   getCountriesList(){
-    return this.http.get(`${this.baseUrl}/Home/GetCountriesList`);
+    return this.http.get(`${this.baseUrl}/GetCountriesList`);
   }
 }
