@@ -36,7 +36,7 @@ namespace Prediction_Web_App.Server.Controller
             {
                 var query = (from f in _db.Fixtures
                              where f.Fixture_ID == fixture_ID
-                             select f).ToList();
+                             select f).AsNoTracking().ToList();
 
                 return Ok(query);
             }
@@ -52,7 +52,33 @@ namespace Prediction_Web_App.Server.Controller
         {
             try
             {
-                return Ok(await _db.Countries.ToListAsync());
+                return Ok(await _db.Countries.AsNoTracking().ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> GetPlayersByFixture([FromQuery] string country1, [FromQuery] string country2)
+        {
+            try
+            {
+               var query = (from p in _db.Player_Infos
+                            join c in _db.Countries on p.Country_Id equals c.Country_ID
+                            select new
+                            {
+                                p.Player_ID,
+                                p.Country_Id,
+                                p.Player_Name,
+                                c.Country_Name
+                            }).AsNoTracking().ToList();
+
+                var finalQuery = query.Where(x => x.Country_Name == country1 || x.Country_Name == country2);
+
+                return Ok(finalQuery);
             }
             catch (Exception ex)
             {

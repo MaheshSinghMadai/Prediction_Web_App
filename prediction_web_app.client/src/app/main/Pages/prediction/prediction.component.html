@@ -1,21 +1,44 @@
-  <div class="container" *ngFor="let fixture of fixture">
+  <div class="card" *ngFor="let fixture of fixture">
     <div class="row fixtures-row" >
-      <div class="col-md-12 d-flex flex-direction-row" >
-        <div class="col-2">
-          <img [src]="fixture?.country1_Flag" style="height:30px; width:30px">
+      <div class="col-md-12 d-flex flex-direction-row" [formGroup]="predictionForm" >
+        <div class="col-1 a">
+          <img class="flag-img" [src]="fixture?.country1_Flag" >
         </div>
-        <div class="col-3">
+        <div class="col-2 a">
             {{ fixture?.country1 }}
         </div>
-        <div class="col-1">
+        <div class="col-1 a">
+          <div class="form-group">
+            <input type="number" placeholder="Score" class="form-control" formControlName="country1_score"
+              name="country1_score">
+          </div>
+        </div>
+       
+        <div class="col-1 a">
           vs
         </div>
-        <div class="col-3">
+        <div class="col-1 a">
+          <div class="form-group">
+            <input type="number" placeholder="Score" class="form-control" formControlName="country2_score"
+              name="country2_score">
+          </div>
+        </div>
+        <div class="col-2 a">
           {{ fixture?.country2 }}
         </div>
-        <div class="col-2">
-          <img [src]="fixture?.country2_Flag" style="height:40px; width:40px">
+        <div class="col-1 a">
+          <img class="flag-img" [src]="fixture?.country2_Flag">
         </div>
+        <div class="col-2 ">
+          <div class="form-group">
+            <label class="form-label"><b>Select the Goal Scorer</b></label>
+            <ng-select class="select-players" >
+              <ng-option *ngFor="let player of playersList" >
+               {{player.player_Name}}
+              </ng-option>
+            </ng-select>
+          </div>
+      </div>
       </div>
     </div>
   </div>

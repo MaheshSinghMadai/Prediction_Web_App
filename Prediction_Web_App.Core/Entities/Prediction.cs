@@ -15,5 +15,6 @@ namespace Prediction_Web_App.Core.Entities
         public string Result { get; set; }
         public string Goal_Scorer { get; set; }
         public Fixture Fixture { get; set; }
+        public int User_Id { get; set; }
     }
 }

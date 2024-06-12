@@ -1,0 +1,21 @@
+.card{
+    margin:20px;
+    padding:20px;
+}
+.a{
+    margin-top:30px;
+    font-size:25px;
+}
+
+.flag-img{
+    height:40px; 
+    width:40px;
+}
+
+.form-group{
+    height:70px !important;
+}
+
+.select-players{
+    margin-left:50px;
+}

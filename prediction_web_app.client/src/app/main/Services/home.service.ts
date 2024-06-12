@@ -15,4 +15,8 @@ export class HomeService {
   getFixtureById(fixture_ID: number){
     return this.http.get(`${this.baseUrl}/Home/GetFixtureById?fixture_ID=${fixture_ID}`);
   }
+
+  getPlayersByFixture(country1: string, country2:string){
+    return this.http.get(`${this.baseUrl}/Home/GetPlayersByFixture?country1=${country1}&country2=${country2}`);
+  }
 }

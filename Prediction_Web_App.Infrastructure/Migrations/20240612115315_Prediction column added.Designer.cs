@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Prediction_Web_App.Infrastructure.Data;
 
@@ -10,9 +11,10 @@ using Prediction_Web_App.Infrastructure.Data;
 namespace Prediction_Web_App.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240612115315_Prediction column added")]
+    partial class Predictioncolumnadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,7 +146,7 @@ namespace Prediction_Web_App.Infrastructure.Migrations
                     b.Property<string>("Result")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("User_Id")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Prediction_ID");
