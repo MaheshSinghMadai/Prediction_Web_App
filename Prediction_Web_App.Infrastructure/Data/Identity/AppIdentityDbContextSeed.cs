@@ -9,13 +9,61 @@ namespace Prediction_Web_App.Infrastructure.Data.Identity
         {
             if (!_userManager.Users.Any())
             {
-                var user = new AppUser
+                var users = new List<AppUser>
                 {
-                    DisplayName = "mahesh",
-                    Email = "mahesh@test.com",
-                    UserName = "mahesh",
+                     new AppUser
+                    {
+                        DisplayName = "mahesh",
+                        Email = "mahesh@test.com",
+                        UserName = "mahesh",
+                    },
+
+                    new AppUser
+                    {
+                        DisplayName = "kasam",
+                        Email = "kasam@test.com",
+                        UserName = "kasam",
+                    },
+                    new AppUser
+                    {
+                        DisplayName = "krishna",
+                        Email = "krishna@test.com",
+                        UserName = "krishna",
+                    },
+                     new AppUser
+                    {
+                        DisplayName = "rakshak",
+                        Email = "rakshak@test.com",
+                        UserName = "rakshak",
+                    },
+                      new AppUser
+                    {
+                        DisplayName = "santosh",
+                        Email = "santosh@test.com",
+                        UserName = "santosh",
+                    }
                 };
-                await _userManager.CreateAsync(user, "P@$$w0rd");
+
+                var passwords = new List<string>
+                 {
+                    "P@$$w0rd",
+                    "kasam@123",
+                    "krishna@123",
+                    "rakshak@123",
+                    "santosh@123",
+                // Add corresponding passwords for each user
+                };
+
+                for (int i = 0; i < users.Count; i++)
+                {
+                    var user = users[i];
+                    var password = passwords[i];
+                    var result = await _userManager.CreateAsync(user, password);
+                    if (!result.Succeeded)
+                    {
+                        throw new Exception("Failed to create user: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+                    }
+                }
             }
         }
     }
