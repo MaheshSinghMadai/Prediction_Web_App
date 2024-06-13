@@ -65,8 +65,11 @@ namespace Prediction_Web_App.Infrastructure.Services
             {
                 throw new ArgumentNullException(fixtureWithGoalScorers == null ? nameof(fixtureWithGoalScorers) : nameof(prediction));
             }
+            int goalsScored = fixtureWithGoalScorers.Goal_Scorers.Count(gs => gs.Player_Id == prediction.Goal_Scorer_Id);
 
-            return fixtureWithGoalScorers.Goal_Scorers.Any(gs => gs.Player_Id == prediction.Goal_Scorer_Id) ? 10 : 0;
+            int points = goalsScored * 10;
+
+            return points;
         }
     }
 }

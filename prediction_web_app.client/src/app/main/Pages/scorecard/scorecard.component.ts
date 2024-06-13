@@ -16,9 +16,9 @@ export class ScorecardComponent implements OnInit{
   userId: any = this.authService.currentUserSource.value?.userId;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private toastr: ToastrService,
+    // private formBuilder: FormBuilder,
+    // private route: ActivatedRoute,
+    // private toastr: ToastrService,
     private scorecardService: ScorecardService,
     private authService: AuthService
   ) {

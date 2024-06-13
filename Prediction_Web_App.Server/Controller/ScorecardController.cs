@@ -11,7 +11,6 @@ using System.Text;
 
 namespace Prediction_Web_App.Server.Controller
 {
-
     [ApiController]
     [Route("[controller]")]
     public class ScorecardController : ControllerBase
