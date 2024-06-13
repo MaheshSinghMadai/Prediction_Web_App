@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../Services/home.service';
 import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,19 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent implements OnInit{
 
   fixturesList : any = [];
+  updateFixtureScoreForm: FormGroup
+
   constructor(
     private homeService: HomeService,
-    private http: HttpClient) {
-    
+    private formBuilder: FormBuilder) 
+    {
+      this.updateFixtureScoreForm = this.formBuilder.group({
+        fixture_ID: ['', Validators.required],
+        country1: ['', Validators.required],
+        country1_score: ['', Validators.required],
+        country2: ['', Validators.required],
+        country2_score: ['', Validators.required],
+      })
   }
   ngOnInit() {
     this.getFixtures();
@@ -21,6 +31,18 @@ export class HomeComponent implements OnInit{
 
   getFixtures() {
     this.homeService.getFixturesList().subscribe(
+      (response) => {
+        this.fixturesList = response;
+        // console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  updateFixtureScore(){
+    this.homeService.updateFixtureScore(this.updateFixtureScoreForm).subscribe(
       (response) => {
         this.fixturesList = response;
         // console.log(response);

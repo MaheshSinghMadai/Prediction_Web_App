@@ -20,5 +20,9 @@ export class HomeService {
     return this.http.get(`${this.baseUrl}/Home/GetPlayersByFixture?country1=${country1}&country2=${country2}`);
   }
 
+  updateFixtureScore(body: any){
+    return this.http.post<any>(`${this.baseUrl}/Scorecard/UpdateFixtureScores`, body)
+  }
+
  
 }

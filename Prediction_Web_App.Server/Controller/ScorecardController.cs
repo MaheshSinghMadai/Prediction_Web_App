@@ -42,7 +42,7 @@ namespace Prediction_Web_App.Server.Controller
                                  s.Final_Score_Points,
                                  s.Goal_Scorer_Points,
                                  s.Total_Points,
-                             }).AsNoTracking().OrderBy(f=> f.Fixture_ID).ToList();
+                             }).AsNoTracking().OrderBy(f => f.Fixture_ID).ToList();
 
                 return Ok(query);
             }
