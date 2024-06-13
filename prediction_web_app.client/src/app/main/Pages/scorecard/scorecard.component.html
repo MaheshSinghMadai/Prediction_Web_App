@@ -1,1 +1,24 @@
-<p>scorecard works!</p>
+<div style="height: 75vh; overflow: auto; margin-top:80px">
+    <table class="table table-responsive align-middle mb-0 bg-white" >
+      <thead>
+        <tr >
+          <th scope="col">Fixure No.</th>
+          <th scope="col">Country</th>
+          <th scope="col">Country</th>
+          <th scope="col">Final Score Points</th>
+          <th scope="col">Goal Scorer Points</th>
+          <th>Total Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let scorecard of scorecard">
+          <td>{{ scorecard?.fixture_ID }}</td>
+          <td>{{ scorecard?.country1 }}</td>
+          <td>{{ scorecard?.country2 }}</td>
+          <td>{{ scorecard?.final_Score_Points }}</td>
+          <td>{{ scorecard?.goal_Scorer_Points }}</td>
+          <td>{{ scorecard?.total_Points }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

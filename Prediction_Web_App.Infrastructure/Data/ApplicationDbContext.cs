@@ -19,7 +19,8 @@ namespace Prediction_Web_App.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Scorecard>()
-                .HasNoKey();
+                        .Property(s => s.Scorecard_Id)
+                        .ValueGeneratedOnAdd();
 
             // Country - Player_Info relationship
             modelBuilder.Entity<Country>()

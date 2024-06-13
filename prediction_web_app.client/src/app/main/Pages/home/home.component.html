@@ -1,10 +1,16 @@
 
-<h1 class="header text-center">
-  <img src="../../../../assets/euro.jpg" style="height:30px; width:30px"> Euro 2024 Fixtures</h1>
+<p class="header text-center">
+  <img src="../../../../assets/euro.jpg" style="height:30px; width:30px"> Euro 2024 Fixtures</p>
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <button type="submit" class="save-btn float-end" [routerLink]="['/main/user-profile']">
+      <button class="save-btn float-end" [routerLink]="['/main/scorecard']">
+        Scorecard 
+        <span>
+          <i class="fa fa-arrow-right"></i>
+        </span>
+      </button>
+      <button class="save-btn float-end" [routerLink]="['/main/user-profile']">
         View Predictions 
         <span>
           <i class="fa fa-arrow-right"></i>

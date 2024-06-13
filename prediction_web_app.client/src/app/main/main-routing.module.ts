@@ -4,6 +4,7 @@ import { HomeComponent } from './Pages/home/home.component';
 import { CountryComponent } from './Pages/country/country.component';
 import { PredictionComponent } from './Pages/prediction/prediction.component';
 import { UserProfileComponent } from './Pages/user-profile/user-profile.component';
+import { ScorecardComponent } from './Pages/scorecard/scorecard.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'user-profile',  
     component: UserProfileComponent,
+  },
+  {
+    path: 'scorecard',  
+    component: ScorecardComponent,
   },
 ];
 
