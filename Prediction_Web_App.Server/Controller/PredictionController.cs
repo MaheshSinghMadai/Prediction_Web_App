@@ -25,8 +25,15 @@ namespace Prediction_Web_App.Server.Controller
             {
                 var query = (from p in _db.Predictions
                              where p.User_Id == user_Id 
-                             select p)
-                             .AsNoTracking().ToList();
+                             select new 
+                             {
+                                p.Fixture_ID,
+                                p.Country1,
+                                p.Country2,
+                                p.Country1_Score,
+                                p.Country2_Score,
+                                p.Goal_Scorer_Name
+                             }).AsNoTracking().ToList();
 
                 return Ok(query);
             }
@@ -42,10 +49,21 @@ namespace Prediction_Web_App.Server.Controller
         {
             try
             {
+
                 var query = (from p in _db.Predictions
+                             join f in _db.Fixtures on p.Fixture_ID equals f.Fixture_ID
                              where p.User_Id == user_Id && p.Fixture_ID == fixture_Id
-                             select p)
-                             .AsNoTracking().ToList();
+                             select new
+                             {
+                                 p.Fixture_ID,
+                                 p.Country1,
+                                 p.Country2,
+                                 f.Country1_Flag,
+                                 p.Country1_Score,
+                                 f.Country2_Flag,
+                                 p.Country2_Score,
+                                 p.Goal_Scorer_Name
+                             }).AsNoTracking().ToList();
 
                 return Ok(query);
             }
@@ -71,10 +89,12 @@ namespace Prediction_Web_App.Server.Controller
                 var prediction = new Prediction()
                 {
                     Fixture_ID = prd.Fixture_ID,
+                    Country1 = prd.Country1,
                     Country1_Score = prd.Country1_Score,
                     Country2_Score = prd.Country2_Score,
-                    Result = prd.Result,
-                    Goal_Scorer = prd.Goal_Scorer,
+                    Country2 = prd.Country2,
+                    Goal_Scorer_Id = prd.Goal_Scorer_Id,
+                    Goal_Scorer_Name = prd.Goal_Scorer_Name,
                     User_Id = prd.User_Id,
                 };
 

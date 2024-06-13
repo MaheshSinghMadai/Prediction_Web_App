@@ -13,7 +13,7 @@ export class PredictionService {
   }
   
   getAllPredictionsByUser(user_Id: string){
-    return this.http.get(`${this.baseUrl}/Prediction/GetPredictionByUserId?user_Id=${user_Id}`)
+    return this.http.get(`${this.baseUrl}/Prediction/GetAllPredictionByUserId?user_Id=${user_Id}`)
   }
 
   getPredictionOfUserByFixure(user_Id: string, fixture_Id: number){

@@ -8,7 +8,7 @@
 }
 
 .col-2, .col-3{
-    font-size:20px;
+    font-size:18px;
     padding:20px;
 }
 
@@ -16,3 +16,15 @@
     font-weight: bolder;
     padding:20px;
 }
+.save-btn {
+    margin: 10px 20px 20px 5px;
+    border: none;
+    background-color: #594aa8;
+    color: white;
+    border-radius: 5px !important;
+    padding: 10px;
+ }
+
+ .flag-img{
+    height:30px; width:30px
+ }

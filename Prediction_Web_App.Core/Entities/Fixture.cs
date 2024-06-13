@@ -12,7 +12,6 @@ namespace Prediction_Web_App.Core.Entities
         public string Country2 { get; set; }
         public string Country2_Flag { get; set; }
         public int Country2_Score { get; set; }
-        public string Result { get; set; }
         public ICollection<Goal_Scorer> Goal_Scorers { get; set; }
         public ICollection<Prediction> Predictions { get; set; }
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Prediction_Web_App.Infrastructure.Data;
 
@@ -10,9 +11,10 @@ using Prediction_Web_App.Infrastructure.Data;
 namespace Prediction_Web_App.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240613044656_Prediction column modifsdsyss")]
+    partial class Predictioncolumnmodifsdsyss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,6 +70,9 @@ namespace Prediction_Web_App.Infrastructure.Migrations
 
                     b.Property<int>("Country2_Score")
                         .HasColumnType("int");
+
+                    b.Property<string>("Result")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Fixture_ID");
 
@@ -144,7 +149,7 @@ namespace Prediction_Web_App.Infrastructure.Migrations
                     b.Property<int>("Goal_Scorer_Id")
                         .HasColumnType("int");
 
-                    b.Property<string>("Goal_Scorer_Name")
+                    b.Property<string>("Result")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("User_Id")
@@ -166,6 +171,9 @@ namespace Prediction_Web_App.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Goal_Scorer_Points")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Result_Points")
                         .HasColumnType("int");
 
                     b.Property<int>("Total_Points")

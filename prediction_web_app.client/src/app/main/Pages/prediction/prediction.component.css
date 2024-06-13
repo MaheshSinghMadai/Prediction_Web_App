@@ -8,8 +8,8 @@
 }
 
 .flag-img{
-    height:40px; 
-    width:40px;
+    height:30px; 
+    width:30px;
 }
 
 .form-group{
@@ -27,4 +27,8 @@
     color: white;
     border-radius: 5px !important;
     padding: 10px;
+ }
+
+ .score{
+    border:#594aa8;
  }

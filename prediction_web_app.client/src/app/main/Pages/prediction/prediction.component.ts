@@ -47,6 +47,7 @@ export class PredictionComponent implements OnInit{
     
     this.getFixtureById();
     this.getPredictionOfUserByFixure();
+    this.getAllPredictionByUser();
   }
 
   getFixtureById() {
@@ -66,7 +67,7 @@ export class PredictionComponent implements OnInit{
     this.homeService.getPlayersByFixture(country1,country2).subscribe(
       (response) => {
         this.playersList = response;
-        // console.log(this.playersList);
+        console.log(this.playersList);
       },
       error => {
         console.log(error);
@@ -99,14 +100,20 @@ export class PredictionComponent implements OnInit{
   }
 
   submit(){
+
+    const selectedPlayer = this.predictionForm.value['goal_scorer'];
+
     const body = {
       fixture_id: this.fixture_id as number,
       country1_score: this.predictionForm.value['country1_score'],
       country2_score: this.predictionForm.value['country2_score'],
-      goal_scorer: this.predictionForm.value['goal_scorer'] as number,
+      goal_scorer_id: selectedPlayer.player_ID,
+      goal_scorer_name: selectedPlayer.player_Name,
+      country1: this.fixture[0].country1,
+      country2: this.fixture[0].country2,
       user_id : this.userId
     }
-    
+
     this.predictionService.addNewPrediction(body).subscribe(
       (response) => {
         console.log(response);

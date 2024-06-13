@@ -6,12 +6,16 @@ import { CountryComponent } from './Pages/country/country.component';
 import { PredictionComponent } from './Pages/prediction/prediction.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserProfileComponent } from './Pages/user-profile/user-profile.component';
+import { ScorecardComponent } from './Pages/scorecard/scorecard.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     CountryComponent,
-    PredictionComponent
+    PredictionComponent,
+    UserProfileComponent,
+    ScorecardComponent
   ],
   imports: [
     CommonModule,
