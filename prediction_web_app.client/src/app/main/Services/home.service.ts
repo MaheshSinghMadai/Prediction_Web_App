@@ -9,20 +9,23 @@ export class HomeService {
   constructor(private http: HttpClient) { }
 
   getFixturesList(){
-    return this.http.get(`${this.baseUrl}/Home/GetFixturesList`);
+    return this.http.get('/home/GetFixturesList');
   }
 
   getFixtureById(fixture_ID: number){
-    return this.http.get(`${this.baseUrl}/Home/GetFixtureById?fixture_ID=${fixture_ID}`);
+    return this.http.get(`/home/GetFixtureById?fixture_ID=${fixture_ID}`);
   }
 
   getPlayersByFixture(country1: string, country2:string){
-    return this.http.get(`${this.baseUrl}/Home/GetPlayersByFixture?country1=${country1}&country2=${country2}`);
+    return this.http.get(`/home/GetPlayersByFixture?country1=${country1}&country2=${country2}`);
   }
 
   updateFixtureScore(body: any){
-    return this.http.post<any>(`${this.baseUrl}/Scorecard/UpdateFixtureScores`, body)
+    return this.http.post<any>('/scorecard/UpdateFixtureScores', body)
   }
 
+  updateGoalScorer(body: any){
+    return this.http.post<any>('/scorecard/UpdateGoalScorers', body)
+  }
  
 }

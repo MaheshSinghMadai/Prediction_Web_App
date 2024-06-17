@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Prediction_Web_App.Core.Entities;
-using Prediction_Web_App.Core.Entities.Identity;
-using Prediction_Web_App.Core.Interface;
 using Prediction_Web_App.Infrastructure.Data;
 using Prediction_Web_App.Infrastructure.Services;
-using System.Text;
+using Prediction_Web_App.Server.DTO;
 
 namespace Prediction_Web_App.Server.Controller
 {
@@ -67,6 +63,7 @@ namespace Prediction_Web_App.Server.Controller
                 // Update fixture scores
                 existingFixture.Country1_Score = fixture.Country1_Score;
                 existingFixture.Country2_Score = fixture.Country2_Score;
+
                 _db.Entry(existingFixture).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
 
@@ -80,6 +77,28 @@ namespace Prediction_Web_App.Server.Controller
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
-        
+
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> UpdateGoalScorers([FromBody] GoalScorerDto goalScorerDto)
+        {
+            try
+            {
+                var goal_Scorer = new Goal_Scorer()
+                {
+                    Fixture_Id = goalScorerDto.Fixture_Id,
+                    Player_Id = goalScorerDto.Player_Id
+                };
+
+                _db.Add(goal_Scorer);
+                await _db.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
     }
 }

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './Pages/home/home.component';
-import { CountryComponent } from './Pages/country/country.component';
 import { PredictionComponent } from './Pages/prediction/prediction.component';
 import { UserProfileComponent } from './Pages/user-profile/user-profile.component';
 import { ScorecardComponent } from './Pages/scorecard/scorecard.component';
+import { FixtureComponent } from './Pages/fixture/fixture.component';
 
 const routes: Routes = [
   {
@@ -16,16 +16,16 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'country',  
-    component: CountryComponent,
-  },
-  {
     path: 'prediction/:fixture_ID',  
     component: PredictionComponent,
   },
   {
     path: 'user-profile',  
     component: UserProfileComponent,
+  },
+  {
+    path: 'fixture/:fixture_ID',  
+    component: FixtureComponent,
   },
   {
     path: 'scorecard',  

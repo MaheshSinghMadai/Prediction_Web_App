@@ -49,7 +49,6 @@ namespace Prediction_Web_App.Server.Controller
         {
             try
             {
-
                 var query = (from p in _db.Predictions
                              join f in _db.Fixtures on p.Fixture_ID equals f.Fixture_ID
                              where p.User_Id == user_Id && p.Fixture_ID == fixture_Id
@@ -63,7 +62,8 @@ namespace Prediction_Web_App.Server.Controller
                                  f.Country2_Flag,
                                  p.Country2_Score,
                                  p.Goal_Scorer_Name
-                             }).AsNoTracking().ToList();
+                             }
+                             ).AsNoTracking().ToList();
 
                 return Ok(query);
             }

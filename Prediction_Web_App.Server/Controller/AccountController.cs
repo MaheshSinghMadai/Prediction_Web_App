@@ -11,7 +11,6 @@ using System.Text;
 
 namespace Prediction_Web_App.Server.Controller
 {
-    
     [ApiController]
     [Route("[controller]")]
     public class AccountController : ControllerBase
@@ -53,12 +52,16 @@ namespace Prediction_Web_App.Server.Controller
                 return Unauthorized();
             }
 
+            var role = await _userManager.GetRolesAsync(user);
+            var roleString = string.Join(",", role);
+           
             return new UserDto
             {
                 UserId = user.Id,
                 Token = _tokenService.CreateToken(user),
                 Username = user.UserName,
                 Email = user.Email,
+                Role = roleString,
                 ExpiresAt = DateTime.Now.AddMinutes(30),
             };
         }
@@ -94,6 +97,6 @@ namespace Prediction_Web_App.Server.Controller
                 return BadRequest(new { error = new { code = "Internal Server Error", message = ex.GetBaseException().Message } });
             }
         }
-
     }
 }
+

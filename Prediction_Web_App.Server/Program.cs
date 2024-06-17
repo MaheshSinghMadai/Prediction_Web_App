@@ -78,8 +78,10 @@ app.MapFallbackToFile("/index.html");
 //    // Seeding identity data to identity database
 //    var userManager = services.GetRequiredService<UserManager<AppUser>>();
 //    var identityContext = services.GetRequiredService<AppIdentityDbContext>();
+//    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 //    await identityContext.Database.MigrateAsync();
 //    await AppIdentityDbContextSeed.SeedUserAsync(userManager);
+//    await ContextSeed.SeedRolesAsync(userManager, roleManager);
 //}
 //catch (Exception ex)
 //{
