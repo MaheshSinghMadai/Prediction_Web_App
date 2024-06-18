@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit{
     this.homeService.getFixturesList().subscribe(
       (response) => {
         this.fixturesList = response;
-        // console.log(response);
+        console.log(response);
       },
       error => {
         console.log(error);

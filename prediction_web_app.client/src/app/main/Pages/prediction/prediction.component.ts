@@ -67,7 +67,7 @@ export class PredictionComponent implements OnInit{
     this.homeService.getPlayersByFixture(country1,country2).subscribe(
       (response) => {
         this.playersList = response;
-        console.log(this.playersList);
+        // console.log(this.playersList);
       },
       error => {
         console.log(error);
@@ -79,7 +79,7 @@ export class PredictionComponent implements OnInit{
     this.predictionService.getAllPredictionsByUser(this.userId).subscribe(
       (response) => {
         this.allFixturePrediction = response;
-        console.log(this.allFixturePrediction);
+        // console.log(this.allFixturePrediction);
       },
       error => {
         console.log(error);
@@ -91,7 +91,7 @@ export class PredictionComponent implements OnInit{
     this.predictionService.getPredictionOfUserByFixure(this.userId,this.fixture_id).subscribe(
       (response) => {
         this.fixturePrediction = response;
-        console.log(this.fixturePrediction);
+        // console.log(this.fixturePrediction);
       },
       error => {
         console.log(error);
