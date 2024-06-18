@@ -40,7 +40,7 @@
         <div class="card">
             <div class="form-group float-end">
                 <label class="form-label"><b>Select the Goal Scorer</b></label>
-                <ng-select class="select-players" formControlName="goal_scorer">
+                <ng-select class="select-players"  [multiple]="true" formControlName="goal_scorer">
                     <ng-option *ngFor="let player of playersList"
                         [value]="{ player_ID: player.player_ID, player_Name: player.player_Name }">
                         {{player.player_Name}}

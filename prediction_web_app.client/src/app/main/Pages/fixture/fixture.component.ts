@@ -21,7 +21,7 @@ export class FixtureComponent implements OnInit {
     private homeService: HomeService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private toastr: ToastrService,
+    private toastr: ToastrService
   ) {
     //form for updating score
     this.updateFixtureScoreForm = this.formBuilder.group({
@@ -98,19 +98,24 @@ export class FixtureComponent implements OnInit {
 
   updateGoalScorer() {
     const selectedPlayer = this.updateGoalScorerForm.value['goal_scorer'];
-    const body = {
-      fixture_ID: this.fixture_id,
-      player_ID: selectedPlayer.player_ID,
-    };
+    selectedPlayer.forEach(
+      (scorer: { player_ID: number; player_Name: string }) => {
+        const body = {
+          fixture_ID: this.fixture_id,
+          player_ID: scorer.player_ID,
+        };
 
-    this.homeService.updateGoalScorer(body).subscribe(
-      (response) => {
-        this.toastr.success('Goal Scorer Updated Successfully');
-        this.updateGoalScorerForm.reset();
-        this.getFixtureById();
-      },
-      (error) => {
-        console.log(error);
+        this.homeService.updateGoalScorer(body).subscribe(
+          (response) => {
+            this.toastr.success('Goal Scorer Updated Successfully');
+            this.updateGoalScorerForm.reset();
+            this.getFixtureById();
+          },
+          (error) => {
+            this.toastr.error(error.error);
+            console.log(error);
+          }
+        );
       }
     );
   }
