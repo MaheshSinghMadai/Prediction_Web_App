@@ -85,5 +85,31 @@ namespace Prediction_Web_App.Server.Controller
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }
+
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> GetGoalScorersByFixture([FromQuery] int fixture_ID)
+        {
+            try
+            {
+                var query = (from g in _db.Goal_Scorers
+                             join p in _db.Player_Infos on g.Player_Id equals p.Player_ID
+                             join c in _db.Countries on p.Country_Id equals c.Country_ID
+                             where g.Fixture_Id == fixture_ID
+                             select new
+                             {
+                                 p.Player_Name,
+                                 c.Country_Name,
+
+                             }).AsNoTracking().ToList();
+
+                return Ok(query);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
     }
 }

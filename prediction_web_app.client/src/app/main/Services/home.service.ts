@@ -28,4 +28,7 @@ export class HomeService {
     return this.http.post<any>('/scorecard/UpdateGoalScorers', body)
   }
  
+  getGoalScorersByFixture(fixture_ID : any){
+    return this.http.get(`/home/GetGoalScorersByFixture?fixture_ID=${fixture_ID}`);
+  }
 }

@@ -12,7 +12,12 @@ import { AuthService } from '../../../auth/auth.service';
 export class HomeComponent implements OnInit{
 
   fixturesList : any = [];
-  updateFixtureScoreForm: FormGroup
+  goalScorersList: any = [];
+  updateFixtureScoreForm: FormGroup;
+  goalScorerBoolean :boolean = false;
+  selectedFixtureId: number | null = null;
+  country1GoalScorers: any[] = [];
+  country2GoalScorers: any[] = [];
 
   role = this.authService.currentUserSource.value?.role;
 
@@ -44,6 +49,18 @@ export class HomeComponent implements OnInit{
       }
     )
   }
+  
+  getGoalScorersByFixture(fixture_ID : any) {
+    this.homeService.getGoalScorersByFixture(fixture_ID).subscribe(
+      (response) => {
+        this.goalScorersList = response;
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
 
   updateFixtureScore(){
     this.homeService.updateFixtureScore(this.updateFixtureScoreForm).subscribe(
@@ -57,4 +74,22 @@ export class HomeComponent implements OnInit{
     )
   }
 
+  getHigherScore(score1: number, score2: number): string {
+    if (score1 > score2) {
+      return 'country1';
+    } else if (score2 > score1) {
+      return 'country2';
+    }
+    return 'draw'; // Optional: if you want to handle draw cases
+  }
+
+  toggleGoalScorers(fixture_ID :number){
+    if (this.selectedFixtureId === fixture_ID) {
+      this.selectedFixtureId = null;
+    } else {
+      this.selectedFixtureId = fixture_ID;
+      this.getGoalScorersByFixture(fixture_ID);
+    }
+    this.goalScorerBoolean != this.goalScorerBoolean;
+  }
 }

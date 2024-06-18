@@ -28,3 +28,12 @@
  .flag-img{
     height:30px; width:30px
  }
+
+ .highlight {
+    font-weight: bolder;
+  }
+
+  .country_name{
+    font-size:10px;
+    color: grey
+  }

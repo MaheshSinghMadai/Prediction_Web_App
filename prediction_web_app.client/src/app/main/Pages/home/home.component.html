@@ -23,20 +23,29 @@
       <div class="col-2">
         <img class="flag-img" [src]="item.country1_Flag">
       </div>
-      <div class="col-3">
+      <div class="col-2" [ngClass]="{'highlight': getHigherScore(item.country1_Score, item.country2_Score) == 'country1'}">
         {{item.country1}}
       </div>
-      <div class="col-1">
-        vs
+      <div class="col-1" [ngClass]="{'highlight': getHigherScore(item.country1_Score, item.country2_Score) == 'country1'}">
+        {{ item.country1_Score }}
       </div>
-      <div class="col-3">
+      <div class="col-1">
+        -
+      </div>
+      <div class="col-1" [ngClass]="{'highlight': getHigherScore(item.country1_Score, item.country2_Score) == 'country2'}">
+        {{ item.country2_Score }}
+      </div>
+      <div class="col-2" [ngClass]="{'highlight': getHigherScore(item.country1_Score, item.country2_Score) == 'country2'}">
         {{item.country2}}
       </div>
       <div class="col-2">
         <img [src]="item.country2_Flag" class="flag-img">
       </div>
-      <div class="col-1" *ngIf="role == 'Admin'" [routerLink]="['/main/fixture',item.fixture_ID]">
+      <div class="col-1" >
         <span>
+          <i class="fa-solid fa-sort-down" style="cursor: pointer; margin-right:20px "  (click)="toggleGoalScorers(item.fixture_ID)"></i>
+        </span>
+        <span *ngIf="role == 'Admin'" [routerLink]="['/main/fixture',item.fixture_ID]">
           <i class="fa-solid fa-edit" style="cursor: pointer;"></i>
         </span>
       </div>
@@ -44,6 +53,11 @@
         <span>
           <i class="fa-solid fa-arrow-right" style="cursor: pointer;"></i>
         </span>
+      </div>
+    </div>
+    <div class="row" *ngIf="selectedFixtureId === item.fixture_ID">
+      <div class="col-md-12" *ngFor="let gs of goalScorersList">
+        {{gs.player_Name}}  <span class="country_name">({{gs.country_Name}})</span>
       </div>
     </div>
   </div>

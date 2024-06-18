@@ -66,7 +66,7 @@ export class FixtureComponent implements OnInit {
     this.homeService.getPlayersByFixture(country1, country2).subscribe(
       (response) => {
         this.playersList = response;
-        console.log(this.playersList);
+        // console.log(this.playersList);
       },
       (error) => {
         console.log(error);
