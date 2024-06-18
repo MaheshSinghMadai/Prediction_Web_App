@@ -7,37 +7,44 @@ namespace Prediction_Web_App.Infrastructure.Data.Identity
     {
         public static async Task SeedUserAsync(UserManager<AppUser> _userManager)
         {
-            if (!_userManager.Users.Any())
+            if (_userManager.Users.Any())
             {
                 var users = new List<AppUser>
                 {
-                     new AppUser
-                    {
-                        DisplayName = "mahesh",
-                        Email = "mahesh@test.com",
-                        UserName = "mahesh",
-                    },
-
                     new AppUser
                     {
                         DisplayName = "kasam",
                         Email = "kasam@test.com",
-                        UserName = "kasam",
+                        UserName = "kasam"
                     },
-                    new AppUser
+                     new AppUser
                     {
                         DisplayName = "krishna",
                         Email = "krishna@test.com",
                         UserName = "krishna",
+                    },
+
+                    new AppUser
+                    {
+                        DisplayName = "rakshak",
+                        Email = "rakshak@test.com",
+                        UserName = "rakshak",
+                    },
+                    new AppUser
+                    {
+                        DisplayName = "santosh",
+                        Email = "santosh@test.com",
+                        UserName = "santosh",
                     }
-                   
+
                 };
 
                 var passwords = new List<string>
                  {
-                    "P@$$w0rd",
-                    "kasam@123",
-                    "krishna@123",
+                    "Kasam@123",
+                    "Krishna@123",
+                    "Rakshak@123",
+                    "Santosh@123",
                 // Add corresponding passwords for each user
                 };
 

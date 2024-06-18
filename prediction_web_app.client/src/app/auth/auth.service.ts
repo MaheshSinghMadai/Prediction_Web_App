@@ -8,7 +8,7 @@ import { User } from './model/user';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'https://localhost:7076';
+  // private baseUrl = 'https://localhost:7076';
   public currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
 
@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   login(body: any) {
-    return this.http.post<any>(`${this.baseUrl}/Account/Login`, body).pipe(
+    return this.http.post<any>('/account/Login', body).pipe(
       map((user: User) => {
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
@@ -50,7 +50,7 @@ export class AuthService {
   private refreshTokenTimeout : any;
 
   refreshToken() {
-    return this.http.post<User>(`${this.baseUrl}/Account/refresh-token`, this.getCurrentUserValue())
+    return this.http.post<User>('/account/refresh-token', this.getCurrentUserValue())
       .pipe(map((user: User) => {
         if (user && user.token) {
           localStorage.setItem('expiresAt', user.expiresAt)
